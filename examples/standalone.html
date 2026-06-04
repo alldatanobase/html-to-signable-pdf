@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>html-to-signable-pdf — standalone single-file test</title>
+  </head>
+  <body style="font-family: system-ui, sans-serif; max-width: 900px; margin: 1rem auto">
+    <h1>Standalone bundle test</h1>
+    <p>
+      Loads <code>dist/standalone/html-to-signable-pdf.standalone.js</code> (a single self-contained
+      bundle) and generates a PDF with both blank fields.
+    </p>
+    <button id="go" style="padding: 8px 16px; font-weight: 600">Generate PDF</button>
+    <span id="status" style="margin-left: 12px; color: #333"></span>
+    <iframe
+      id="out"
+      title="PDF preview"
+      style="display: block; width: 100%; height: 600px; border: 1px solid #ccc; margin-top: 12px"
+    ></iframe>
+
+    <!-- The single self-contained bundle. -->
+    <script src="../dist/standalone/html-to-signable-pdf.standalone.js"></script>
+    <script>
+      const sample = `<!doctype html><html><body style="font-family:Helvetica;font-size:11pt">
+        <h1>Standalone Test Agreement</h1>
+        <p>This PDF was produced from a single embedded JavaScript file.</p>
+        <p style="margin-top:48pt">Client signature:</p>
+        <div class="pdfdigitalsignaturefield" style="height:56pt;border-bottom:1px solid #888"></div>
+        <p style="margin-top:24pt">Date:</p>
+        <div class="pdfdatefield" style="height:24pt;border-bottom:1px solid #888"></div>
+      </body></html>`;
+
+      document.getElementById("go").addEventListener("click", async () => {
+        const status = document.getElementById("status");
+        status.textContent = "working…";
+        try {
+          const bytes = await PdfFromTemplate.htmlToSignablePdf(sample, {
+            onProgress: (stage) => (status.textContent = stage),
+          });
+          const url = URL.createObjectURL(new Blob([bytes.slice()], { type: "application/pdf" }));
+          document.getElementById("out").src = url;
+          status.textContent = `done — ${(bytes.length / 1024).toFixed(0)} KB`;
+        } catch (err) {
+          status.textContent = "error: " + (err && err.message ? err.message : err);
+          console.error(err);
+        }
+      });
+    </script>
+  </body>
+</html>

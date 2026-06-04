@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      /* Exercises every form-field control. Each placeholder is matched by CLASS and sized by CSS:
+           .pdftextfield       → text field   (data-multiline, data-value, data-maxlen)
+           .pdfcheckboxfield   → checkbox      (data-checked)
+           .pdfradiofield      → radio button  (group via shared data-field-name; data-export-value)
+           .pdfdropdownfield   → dropdown      (data-options "a|b|c", data-default, data-editable)
+           .pdflistboxfield    → list box      (data-options, data-default, data-multiselect)
+           .pdfdigitalsignaturefield / .pdfdatefield → signature + date (as before)
+         Any placeholder may set data-field-name to name its field; otherwise names are
+         auto-assigned (Text1, Checkbox1, …). Give each a definite size. */
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 11pt;
+        line-height: 1.5;
+        color: #111;
+      }
+      h1 {
+        font-size: 20pt;
+        margin: 0 0 4pt;
+      }
+      h2 {
+        font-size: 13pt;
+        margin: 18pt 0 6pt;
+      }
+      p {
+        margin: 0 0 8pt;
+      }
+      label {
+        display: block;
+        font-size: 9pt;
+        color: #555;
+        margin: 10pt 0 2pt;
+      }
+      .row {
+        display: flex;
+        gap: 24pt;
+      }
+      .row > div {
+        flex: 1;
+      }
+      .check-row {
+        display: flex;
+        align-items: center;
+        gap: 8pt;
+        margin-top: 8pt;
+      }
+      .check-row .caption {
+        font-size: 10pt;
+      }
+
+      /* Control sizing — each placeholder reserves the box its widget occupies. */
+      .pdftextfield {
+        width: 100%;
+        height: 22pt;
+        border: 1px solid #888;
+        box-sizing: border-box;
+      }
+      .pdftextfield.multiline {
+        height: 64pt;
+      }
+      .pdfdropdownfield,
+      .pdflistboxfield {
+        width: 100%;
+        border: 1px solid #888;
+        box-sizing: border-box;
+      }
+      .pdfdropdownfield {
+        height: 22pt;
+      }
+      .pdflistboxfield {
+        height: 64pt;
+      }
+      .pdfcheckboxfield,
+      .pdfradiofield {
+        width: 14pt;
+        height: 14pt;
+        border: 1px solid #888;
+        box-sizing: border-box;
+        flex: 0 0 auto;
+      }
+      .pdfdigitalsignaturefield {
+        width: 100%;
+        height: 56pt;
+        border-bottom: 1px solid #888;
+      }
+      .pdfdatefield {
+        width: 100%;
+        height: 24pt;
+        border-bottom: 1px solid #888;
+      }
+      .sig-row {
+        display: flex;
+        gap: 24pt;
+        margin-top: 18pt;
+      }
+      .sig-col {
+        flex: 1;
+      }
+      .sig-label {
+        font-size: 9pt;
+        color: #555;
+        margin-top: 4pt;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Membership Application</h1>
+    <p>Complete the fields below. This sample demonstrates every supported form-field control.</p>
+
+    <h2>1. Your details</h2>
+    <div class="row">
+      <div>
+        <label>Full name</label>
+        <div class="pdftextfield" data-field-name="FullName" data-maxlen="60"></div>
+      </div>
+      <div>
+        <label>Email</label>
+        <div class="pdftextfield" data-field-name="Email"></div>
+      </div>
+    </div>
+
+    <label>Mailing address</label>
+    <div class="pdftextfield multiline" data-field-name="Address" data-multiline="true"></div>
+
+    <h2>2. Membership</h2>
+    <label>Plan</label>
+    <div class="check-row">
+      <div class="pdfradiofield" data-field-name="Plan" data-export-value="basic"></div>
+      <span class="caption">Basic</span>
+      <div class="pdfradiofield" data-field-name="Plan" data-export-value="standard" data-checked="true"></div>
+      <span class="caption">Standard</span>
+      <div class="pdfradiofield" data-field-name="Plan" data-export-value="premium"></div>
+      <span class="caption">Premium</span>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Preferred contact</label>
+        <div class="pdfdropdownfield" data-field-name="Contact"
+             data-options="Email|Phone|Mail" data-default="Email"></div>
+      </div>
+      <div>
+        <label>Interests (multi-select)</label>
+        <div class="pdflistboxfield" data-field-name="Interests"
+             data-options="Events|Newsletter|Volunteering|Donations"
+             data-default="Newsletter" data-multiselect="true"></div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <div class="pdfcheckboxfield" data-field-name="AgreeTOS" data-checked="true"></div>
+      <span class="caption">I agree to the terms of service</span>
+    </div>
+    <div class="check-row">
+      <div class="pdfcheckboxfield" data-field-name="Newsletter"></div>
+      <span class="caption">Subscribe me to the newsletter</span>
+    </div>
+
+    <h2>3. Signature</h2>
+    <div class="sig-row">
+      <div class="sig-col">
+        <div class="pdfdigitalsignaturefield"></div>
+        <div class="sig-label">Applicant signature</div>
+      </div>
+      <div class="sig-col">
+        <div class="pdfdatefield"></div>
+        <div class="sig-label">Date (mm/dd/yyyy)</div>
+      </div>
+    </div>
+  </body>
+</html>

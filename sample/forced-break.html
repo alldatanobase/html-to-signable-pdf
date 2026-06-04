@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      /* Demonstrates author-controlled page breaks. The whole document is short enough to fit
+         on a single page on its own — every page after the first exists ONLY because of a
+         forced break. Two ways to force a break are shown:
+           1. on a real content element:  <h2 class="pdfpagebreak">  (the heading starts a page)
+           2. as a standalone marker:      <div class="pdfpagebreak"></div>
+         Note: don't lead the document with a bare marker — a break before the very first
+         element can produce a blank first page. */
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 11pt;
+        line-height: 1.5;
+        color: #111;
+      }
+      h1 {
+        font-size: 20pt;
+        margin: 0 0 8pt;
+      }
+      h2 {
+        font-size: 14pt;
+        margin: 0 0 6pt;
+      }
+      .meta {
+        color: #555;
+        font-size: 9pt;
+        margin-bottom: 16pt;
+      }
+      p {
+        margin: 0 0 8pt;
+      }
+      .sig-row {
+        display: flex;
+        gap: 24pt;
+        margin-top: 24pt;
+      }
+      .sig-col {
+        flex: 1;
+      }
+      .sig-label {
+        font-size: 9pt;
+        color: #555;
+        margin-top: 4pt;
+      }
+      .pdfdigitalsignaturefield {
+        width: 100%;
+        height: 56pt;
+        border-bottom: 1px solid #888;
+      }
+      .pdfdatefield {
+        width: 100%;
+        height: 24pt;
+        border-bottom: 1px solid #888;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- PAGE 1 -->
+    <h1>Forced Page Breaks</h1>
+    <div class="meta">Demonstrating the <code>pdfpagebreak</code> class</div>
+    <p>
+      This short document fits comfortably on a single page. The pages that follow exist only
+      because of explicit page breaks added in the markup — not because the content overflowed.
+    </p>
+    <p>
+      To force a break, add <code>class="pdfpagebreak"</code> to any element: that element will
+      begin on a new page. You can also drop in an empty
+      <code>&lt;div class="pdfpagebreak"&gt;&lt;/div&gt;</code> as a standalone marker.
+    </p>
+
+    <!-- PAGE 2: the class is on a real content element (this heading starts the page). -->
+    <h2 class="pdfpagebreak">Section Two (starts on its own page)</h2>
+    <p>
+      This heading carries the <code>pdfpagebreak</code> class, so it begins on page 2 even though
+      there was plenty of room left on page 1. Everything that follows flows normally until the
+      next forced break.
+    </p>
+
+    <!-- PAGE 3: a standalone marker div forces the signature block onto a fresh page. -->
+    <div class="pdfpagebreak"></div>
+    <h2>Acknowledgement</h2>
+    <p>By signing below, you agree to the terms described in this document.</p>
+    <div class="sig-row">
+      <div class="sig-col">
+        <!-- Replaced by a blank AcroForm digital-signature field in the PDF. -->
+        <div class="pdfdigitalsignaturefield"></div>
+        <div class="sig-label">Signature</div>
+      </div>
+      <div class="sig-col">
+        <!-- Replaced by a blank, fillable AcroForm date field in the PDF. -->
+        <div class="pdfdatefield"></div>
+        <div class="sig-label">Date (mm/dd/yyyy)</div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      /* Demonstrates MULTIPLE signature and date fields in one document, matched by class.
+         Each placeholder may name its field explicitly with data-field-name="..."; placeholders
+         without it are auto-named in document order (Signature1, Signature2…, Date1, Date2…),
+         skipping any name already taken by an explicit one.
+
+         This sample mixes both:
+           - Buyer / Seller signatures + dates use explicit data-field-name.
+           - The witness signature has NO name, so it auto-names to "Signature1". */
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 11pt;
+        line-height: 1.5;
+        color: #111;
+      }
+      h1 {
+        font-size: 20pt;
+        margin: 0 0 8pt;
+      }
+      h2 {
+        font-size: 13pt;
+        margin: 18pt 0 6pt;
+      }
+      p {
+        margin: 0 0 8pt;
+      }
+      .parties {
+        display: flex;
+        gap: 32pt;
+        margin-top: 12pt;
+      }
+      .party {
+        flex: 1;
+      }
+      .label {
+        font-size: 9pt;
+        color: #555;
+        margin-top: 4pt;
+      }
+      .field-row {
+        display: flex;
+        gap: 24pt;
+        margin-top: 12pt;
+      }
+      .field-row > div {
+        flex: 1;
+      }
+      /* Both placeholder classes get a definite size — each element reserves the space its
+         widget occupies. break-inside:avoid is applied by the library so none is ever split. */
+      .pdfdigitalsignaturefield {
+        width: 100%;
+        height: 56pt;
+        border-bottom: 1px solid #888;
+      }
+      .pdfdatefield {
+        width: 100%;
+        height: 24pt;
+        border-bottom: 1px solid #888;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Purchase Agreement</h1>
+    <p>
+      This Purchase Agreement is entered into between the Buyer and the Seller. Each party signs
+      and dates below; a witness countersigns to attest to the signatures.
+    </p>
+
+    <h2>Buyer</h2>
+    <div class="field-row">
+      <div>
+        <!-- Explicit name: this becomes the AcroForm field "BuyerSignature". -->
+        <div class="pdfdigitalsignaturefield" data-field-name="BuyerSignature"></div>
+        <div class="label">Buyer signature</div>
+      </div>
+      <div>
+        <div class="pdfdatefield" data-field-name="BuyerDate"></div>
+        <div class="label">Date (mm/dd/yyyy)</div>
+      </div>
+    </div>
+
+    <h2>Seller</h2>
+    <div class="field-row">
+      <div>
+        <div class="pdfdigitalsignaturefield" data-field-name="SellerSignature"></div>
+        <div class="label">Seller signature</div>
+      </div>
+      <div>
+        <div class="pdfdatefield" data-field-name="SellerDate"></div>
+        <div class="label">Date (mm/dd/yyyy)</div>
+      </div>
+    </div>
+
+    <h2>Witness</h2>
+    <p>The undersigned witness attests to the signatures above.</p>
+    <div class="field-row">
+      <div>
+        <!-- No data-field-name: auto-named "Signature1" (first unnamed signature). -->
+        <div class="pdfdigitalsignaturefield"></div>
+        <div class="label">Witness signature</div>
+      </div>
+      <div>
+        <!-- No data-field-name: auto-named "Date1" (first unnamed date). -->
+        <div class="pdfdatefield"></div>
+        <div class="label">Date (mm/dd/yyyy)</div>
+      </div>
+    </div>
+  </body>
+</html>

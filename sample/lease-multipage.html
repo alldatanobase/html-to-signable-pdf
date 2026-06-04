@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      /* A deliberately long document: the numbered clauses overflow a single page, so
+         Paged.js splits it across several pages. The signature block lives at the very end,
+         which lands it on a *later* page — exercising the per-page placeholder measurement
+         (the field must be placed on whichever page it actually rendered on, not page 1). */
+      body {
+        font-family: Times, "Times New Roman", serif;
+        font-size: 11pt;
+        line-height: 1.5;
+        color: #111;
+      }
+      h1 {
+        font-size: 20pt;
+        margin: 0 0 4pt;
+      }
+      h2 {
+        font-size: 13pt;
+        margin: 16pt 0 6pt;
+      }
+      p {
+        margin: 0 0 8pt;
+        text-align: justify;
+      }
+      .meta {
+        color: #555;
+        font-size: 9pt;
+        margin-bottom: 16pt;
+      }
+      ol.clauses > li {
+        margin-bottom: 10pt;
+      }
+      .sig-row {
+        display: flex;
+        gap: 24pt;
+        margin-top: 28pt;
+      }
+      .sig-col {
+        flex: 1;
+      }
+      .sig-label {
+        font-size: 9pt;
+        color: #555;
+        margin-top: 4pt;
+      }
+      /* Placeholders: give each a definite size — it reserves the space the form widget
+         occupies. break-inside:avoid is applied by the library so it is never split. */
+      .pdfdigitalsignaturefield {
+        width: 100%;
+        height: 56pt;
+        border-bottom: 1px solid #888;
+      }
+      .pdfdatefield {
+        width: 100%;
+        height: 24pt;
+        border-bottom: 1px solid #888;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Residential Lease Agreement</h1>
+    <div class="meta">Lease no. RL-2026-0612 &middot; Premises: 100 Maple Street, Unit 4</div>
+
+    <p>
+      This Residential Lease Agreement (the &ldquo;Lease&rdquo;) is made between the landlord
+      (&ldquo;Landlord&rdquo;) and the undersigned tenant (&ldquo;Tenant&rdquo;) for the lease of
+      the premises identified above. The parties agree to the following terms and conditions,
+      which together constitute the entire agreement between them.
+    </p>
+
+    <h2>Terms and Conditions</h2>
+    <ol class="clauses">
+      <li>
+        <strong>Term.</strong> The Lease begins on the commencement date and continues for the
+        fixed term stated in Schedule A, after which it shall continue month-to-month unless
+        either party provides written notice of termination in accordance with these terms.
+      </li>
+      <li>
+        <strong>Rent.</strong> Tenant shall pay the monthly rent stated in Schedule A in advance
+        on the first day of each calendar month, without demand, deduction, or set-off, at the
+        address designated by Landlord or by such other method as Landlord may reasonably direct.
+      </li>
+      <li>
+        <strong>Security Deposit.</strong> Tenant shall pay a security deposit as stated in
+        Schedule A, to be held by Landlord as security for the performance of Tenant's
+        obligations. The deposit shall be returned, less lawful deductions, within the period
+        required by applicable law after the Tenant vacates the premises.
+      </li>
+      <li>
+        <strong>Use of Premises.</strong> The premises shall be used solely as a private
+        residence for the persons named in this Lease and for no other purpose. Tenant shall not
+        carry on any trade or business at the premises without the prior written consent of
+        Landlord.
+      </li>
+      <li>
+        <strong>Maintenance and Repairs.</strong> Tenant shall keep the premises clean and in
+        good condition and shall promptly notify Landlord of any damage or needed repairs.
+        Tenant shall be responsible for damage caused by the negligence or misuse of Tenant or
+        Tenant's guests.
+      </li>
+      <li>
+        <strong>Utilities.</strong> Except as otherwise stated in Schedule A, Tenant shall be
+        responsible for arranging and paying for all utilities and services supplied to the
+        premises, including electricity, gas, water, and waste collection, throughout the term.
+      </li>
+      <li>
+        <strong>Alterations.</strong> Tenant shall not make any alterations, additions, or
+        improvements to the premises without the prior written consent of Landlord. Any approved
+        alterations shall become the property of Landlord upon termination unless agreed
+        otherwise in writing.
+      </li>
+      <li>
+        <strong>Pets.</strong> No pets or animals of any kind shall be kept on the premises
+        without the prior written consent of Landlord, which consent may be subject to
+        reasonable conditions and an additional deposit where permitted by law.
+      </li>
+      <li>
+        <strong>Entry.</strong> Landlord may enter the premises at reasonable times and upon
+        reasonable notice to inspect, make repairs, or show the premises to prospective tenants
+        or purchasers, except in the case of an emergency where no notice is required.
+      </li>
+      <li>
+        <strong>Assignment and Subletting.</strong> Tenant shall not assign this Lease or sublet
+        the premises, in whole or in part, without the prior written consent of Landlord. Any
+        purported assignment or subletting without such consent shall be void.
+      </li>
+      <li>
+        <strong>Insurance.</strong> Tenant is encouraged to maintain renter's insurance covering
+        Tenant's personal property and liability. Landlord's insurance does not cover Tenant's
+        personal belongings, and Landlord shall not be liable for any loss thereof except as
+        required by law.
+      </li>
+      <li>
+        <strong>Default.</strong> If Tenant fails to pay rent when due or breaches any other term
+        of this Lease, Landlord may, after giving any notice required by law, terminate this
+        Lease and pursue all remedies available, including recovery of possession and damages.
+      </li>
+      <li>
+        <strong>Quiet Enjoyment.</strong> Provided Tenant performs all obligations under this
+        Lease, Tenant shall peaceably hold and enjoy the premises during the term without
+        interruption by Landlord or any person lawfully claiming through Landlord.
+      </li>
+      <li>
+        <strong>Notices.</strong> Any notice under this Lease shall be in writing and delivered
+        personally or sent by recognized mail to the addresses stated in Schedule A, or to such
+        other address as a party may designate by written notice to the other.
+      </li>
+      <li>
+        <strong>Governing Law.</strong> This Lease shall be governed by and construed in
+        accordance with the laws of the jurisdiction in which the premises are located, without
+        regard to its conflict-of-laws principles.
+      </li>
+      <li>
+        <strong>Entire Agreement.</strong> This Lease, together with its Schedules, constitutes
+        the entire agreement between the parties and supersedes all prior negotiations,
+        representations, and agreements, whether written or oral, relating to its subject matter.
+      </li>
+    </ol>
+
+    <h2>Acknowledgement and Signature</h2>
+    <p>
+      By signing below, the Tenant acknowledges having read, understood, and agreed to all of the
+      terms and conditions set out in this Lease and confirms receipt of a copy of this document.
+    </p>
+
+    <div class="sig-row">
+      <div class="sig-col">
+        <!-- Replaced by a blank AcroForm digital-signature field in the PDF. -->
+        <div class="pdfdigitalsignaturefield"></div>
+        <div class="sig-label">Tenant signature</div>
+      </div>
+      <div class="sig-col">
+        <!-- Replaced by a blank, fillable AcroForm date field in the PDF. -->
+        <div class="pdfdatefield"></div>
+        <div class="sig-label">Date (mm/dd/yyyy)</div>
+      </div>
+    </div>
+  </body>
+</html>

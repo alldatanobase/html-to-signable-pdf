@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      /* HOW HEADER/FOOTER VERTICAL POSITIONING WORKS
+         ---------------------------------------------
+         The header is drawn into the page's TOP margin band; the footer into the BOTTOM band.
+         Each band's height = the corresponding page margin (the "Margins (pt)" control in the
+         demo, or the `marginsPt` option). The body content always begins exactly at the top
+         margin, so the space between the header and the body is:
+
+             (top margin)  −  (height + offset of the header's content)
+
+         You therefore position a header/footer vertically with ordinary CSS *inside* the band:
+           • align the content to the TOP / MIDDLE / BOTTOM of the band, and
+           • add padding/margin to fine-tune the gap.
+
+         Tip: increase the TOP margin in the demo's "Margins (pt)" control and watch the gap below
+         the header grow — the band gets taller while the header content stays put at the top. */
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 11pt;
+        line-height: 1.5;
+        color: #111;
+      }
+      h1 {
+        font-size: 20pt;
+        margin: 0 0 8pt;
+      }
+      h2 {
+        font-size: 13pt;
+        margin: 16pt 0 6pt;
+      }
+      p {
+        margin: 0 0 8pt;
+        text-align: justify;
+      }
+
+      /* HEADER — pinned to the TOP of the band, leaving the rest of the band as a gap before
+         the body. `height:100%` makes the element fill the band; `justify-content:flex-start`
+         (a column flex) keeps the content at the top; `padding-bottom` is the explicit gap
+         between the header's rule and the body. Raise the top margin to enlarge that gap. */
+      #pdfheader {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start; /* TOP-align within the band */
+        padding-bottom: 18pt;        /* ← breathing room between header and body */
+        color: #2563af;
+      }
+      #pdfheader .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        border-bottom: 1.5px solid #2563af;
+        padding-bottom: 4pt;
+        font-size: 9pt;
+      }
+      #pdfheader .title {
+        font-weight: bold;
+        font-size: 12pt;
+      }
+
+      /* FOOTER — pinned to the BOTTOM of the band (away from the body), so the gap sits between
+         the body and the footer. `height:100%` + `align-items:flex-end` bottom-aligns it;
+         `padding-top` adds space above the page number. */
+      #pdffooter {
+        height: 100%;
+        display: flex;
+        align-items: flex-end;       /* BOTTOM-align within the band */
+        justify-content: center;
+        padding-top: 18pt;           /* ← breathing room between body and footer */
+      }
+      #pdffooter .page-num {
+        font-size: 9pt;
+        color: #555;
+      }
+
+      .sig-row {
+        display: flex;
+        gap: 24pt;
+        margin-top: 24pt;
+      }
+      .sig-col {
+        flex: 1;
+      }
+      .sig-label {
+        font-size: 9pt;
+        color: #555;
+        margin-top: 4pt;
+      }
+      .pdfdigitalsignaturefield {
+        width: 100%;
+        height: 56pt;
+        border-bottom: 1px solid #888;
+      }
+      .pdfdatefield {
+        width: 100%;
+        height: 24pt;
+        border-bottom: 1px solid #888;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Repeated in the TOP margin of every page, top-aligned with a gap before the body. -->
+    <div id="pdfheader">
+      <div class="row">
+        <span class="title">Quarterly Policy Brief</span>
+        <span>Internal &middot; Q3</span>
+      </div>
+    </div>
+
+    <!-- Repeated in the BOTTOM margin of every page, bottom-aligned with a gap after the body.
+         [[page]] = current page, [[pages]] = total page count. -->
+    <div id="pdffooter">
+      <span class="page-num">Page [[page]] of [[pages]]</span>
+    </div>
+
+    <h1>Quarterly Policy Brief</h1>
+    <p>
+      This brief summarizes policy updates for the quarter. Notice the spacing: the header sits at
+      the very top of the page with a deliberate gap before this text, and the page number is
+      parked at the bottom of the page with a gap after the body — both controlled purely by CSS
+      inside the header/footer elements.
+    </p>
+
+    <h2>1. Overview</h2>
+    <p>
+      The header and footer are written once in the source document and lifted into every page's
+      margins automatically. Because they are positioned with ordinary CSS, you can place their
+      content anywhere within the margin band: flush to the body, centered, or against the page
+      edge. Try widening the top margin in the demo to see the gap below the header grow.
+    </p>
+    <p>
+      Adjusting the bottom margin behaves the same way for the footer: the band grows downward,
+      and because the footer content is bottom-aligned it stays pinned near the page edge while
+      the gap above it expands.
+    </p>
+
+    <h2>2. Spacing Recipes</h2>
+    <p>
+      To add room between the header and the body, either increase the top margin (taller band) or
+      add padding/margin to the bottom of the header element. To move a footer away from the body,
+      bottom-align it and let the band height do the work. These two levers — band height and
+      in-band alignment — cover essentially every header/footer layout.
+    </p>
+    <p>
+      The same document styles that apply to the body also style the injected header and footer, so
+      classes, ids, and inline styles all work as expected. Keep header/footer content within the
+      margin band; anything taller than the band is clipped.
+    </p>
+
+    <h2>3. Continued Notes</h2>
+    <p>
+      Field teams should review the updated procedures and confirm receipt. The acknowledgement
+      below captures a signature and date. This paragraph and the next exist mainly to push content
+      onto a second page so the running header and footer — and the incrementing page number — are
+      visible across more than one page.
+    </p>
+    <p>
+      Additional guidance, schedules, and appendices would normally follow here. For the purposes of
+      this sample, it is enough to confirm that the header repeats at the top of each page with its
+      gap intact, and that the footer's page number updates from one page to the next while staying
+      anchored near the bottom edge.
+    </p>
+    <p>
+      When you are satisfied with the spacing, sign and date below to acknowledge the brief.
+    </p>
+
+    <h2>4. Acknowledgement</h2>
+    <div class="sig-row">
+      <div class="sig-col">
+        <div class="pdfdigitalsignaturefield"></div>
+        <div class="sig-label">Reviewer signature</div>
+      </div>
+      <div class="sig-col">
+        <div class="pdfdatefield"></div>
+        <div class="sig-label">Date (mm/dd/yyyy)</div>
+      </div>
+    </div>
+  </body>
+</html>

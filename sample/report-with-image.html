@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      /* Tests raster <img> support through the Paged.js -> dom-to-svg -> svg2pdf pipeline.
+         Images are embedded as base64 data URIs so the sample is fully self-contained (a
+         relative or remote src would not resolve / could hit CORS in the off-screen render).
+         The images are asymmetric on purpose, so any wrong scaling or vertical flip is obvious. */
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 11pt;
+        line-height: 1.5;
+        color: #111;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 14pt;
+        border-bottom: 2px solid #2563af;
+        padding-bottom: 10pt;
+        margin-bottom: 16pt;
+      }
+      header img.logo {
+        width: 56pt;
+        height: 56pt;
+      }
+      .org {
+        font-size: 16pt;
+        font-weight: bold;
+        color: #2563af;
+      }
+      .org small {
+        display: block;
+        font-size: 9pt;
+        font-weight: normal;
+        color: #555;
+      }
+      h1 {
+        font-size: 19pt;
+        margin: 0 0 8pt;
+      }
+      p {
+        margin: 0 0 8pt;
+        text-align: justify;
+      }
+      figure {
+        margin: 14pt 0;
+      }
+      figure img.banner {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid #ccc;
+      }
+      figcaption {
+        font-size: 9pt;
+        color: #555;
+        margin-top: 4pt;
+      }
+      .sig-row {
+        display: flex;
+        gap: 24pt;
+        margin-top: 28pt;
+      }
+      .sig-col {
+        flex: 1;
+      }
+      .sig-label {
+        font-size: 9pt;
+        color: #555;
+        margin-top: 4pt;
+      }
+      .pdfdigitalsignaturefield {
+        width: 100%;
+        height: 56pt;
+        border-bottom: 1px solid #888;
+      }
+      .pdfdatefield {
+        width: 100%;
+        height: 24pt;
+        border-bottom: 1px solid #888;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <img class="logo" alt="Logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAIAAABMXPacAAACgklEQVR42u3d0XGDQAyEYTWTd/eUbtxMWnMHpAPHAU67q/s1fs6g/QyecKCrg5JWEQEAAFAAAEABAAAFwL/r6/sHgOURX/kAIAg9CKPGh26OURtGb8VQe+buI1FEr2UootcyFOlrDYrotQxF+lqDInotQ5G+1qBIX2tQRK9lKNLXGhTpaw2K9LUGlZ5++s3USkl/0oHFAET8PokBsv7rMTzacusn9N6UACB9McTk+C0AZiyLtgJMWhbX9lLCIz6cStWUDODwqwyAqemruivS1/bYDXAklCnAJuk3N9sHcKSVF8Bu6bd1HQ/wej4A6Ev/9Xx88jExuA1Anv6HuS+SWNq+O8Dp6G9kEAOkp29u4AtwY/rXDSIBfKK/hWEXgKXpXzHQAAz7+hueBLXb19/tJFgCYJ5+v0EAQHP6pw1aATqvP7MB3mRiASBJ/5xBAEDK19/kKgTA9gDC9DuvQgAAAAAAAAAAQArAJunLDTgDuAQBAAAAAAAAAADcDQUAAFbEdlySZE2YpyK2fyyF54J4Mo5HE3k2dJOTwCd93g8YDcAbMtkAvCM2x8A2fd4TDgHgTXlmRbwjWffHGdYhLiMA5gXFD2xiYtZVAGbGTRjax9TESwDMDRXPDZ1tsNfoYmZHnwdgerp4evokAzZwYAcNpx7YQ8aiGXZRsuiKfcT0vbGTnler7CVpasBuqjsa3BUaO2oP2lF7E4N747ofYDDDiqBWAcwzWJTSQoBJBusiWgswgGF1OB0AuQYNyTQBxDG0ZdIKkGLQGUg3gDlDfxQaAEMGVQhKAJObqdqyAJAwmHRtBJC70jkQ4EYM8+4CAP7kiT7+eID0AgAAACgAAKAA2LN+AYIAf8BN4YrIAAAAAElFTkSuQmCC" />
+      <div class="org">Summit Field Services<small>Site Survey &amp; Inspection Report</small></div>
+    </header>
+
+    <h1>Property Inspection Summary</h1>
+    <p>
+      This report summarizes the findings of the on-site inspection conducted at the property
+      referenced below. The accompanying photograph documents the general condition of the site
+      at the time of the visit. Please review the summary and sign where indicated to acknowledge
+      receipt of this report.
+    </p>
+
+    <figure>
+      <img class="banner" alt="Site photograph" src="data:image/png;base64,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" />
+      <figcaption>Figure 1. Representative view of the surveyed site (looking north).</figcaption>
+    </figure>
+
+    <p>
+      No significant structural concerns were identified during the inspection. Routine
+      maintenance recommendations are included in the attached schedule. The inspector's findings
+      are based on a visual assessment of accessible areas only and do not constitute a warranty
+      of any kind.
+    </p>
+
+    <div class="sig-row">
+      <div class="sig-col">
+        <!-- Replaced by a blank AcroForm digital-signature field in the PDF. -->
+        <div class="pdfdigitalsignaturefield"></div>
+        <div class="sig-label">Inspector signature</div>
+      </div>
+      <div class="sig-col">
+        <!-- Replaced by a blank, fillable AcroForm date field in the PDF. -->
+        <div class="pdfdatefield"></div>
+        <div class="sig-label">Date (mm/dd/yyyy)</div>
+      </div>
+    </div>
+  </body>
+</html>

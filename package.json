@@ -1,0 +1,42 @@
+{
+  "name": "html-to-signable-pdf",
+  "version": "0.1.0",
+  "description": "Browser TypeScript library that turns an HTML string into a vector PDF and embeds blank AcroForm digital-signature and form fields.",
+  "type": "module",
+  "license": "MIT",
+  "main": "./dist/lib/index.js",
+  "module": "./dist/lib/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/lib/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:lib": "vite build --config vite.lib.config.ts",
+    "build:types": "tsc -p tsconfig.lib.json --emitDeclarationOnly --outDir dist/types",
+    "build:standalone": "node scripts/build-standalone.mjs",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "dom-to-svg": "^0.12.2",
+    "jspdf": "^4.2.1",
+    "pagedjs": "^0.4.3",
+    "svg2pdf.js": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "esbuild": "^0.28.0",
+    "puppeteer-core": "^23.11.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.14"
+  }
+}

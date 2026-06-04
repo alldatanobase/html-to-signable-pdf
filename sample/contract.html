@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      /* Keep it simple: basic block layout, system fonts, no JS-driven content. */
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 11pt;
+        line-height: 1.5;
+        color: #111;
+      }
+      h1 {
+        font-size: 20pt;
+        margin: 0 0 8pt;
+      }
+      h2 {
+        font-size: 13pt;
+        margin: 18pt 0 6pt;
+      }
+      p {
+        margin: 0 0 8pt;
+      }
+      .meta {
+        color: #555;
+        font-size: 9pt;
+        margin-bottom: 16pt;
+      }
+      .sig-row {
+        display: flex;
+        gap: 24pt;
+        margin-top: 24pt;
+      }
+      .sig-col {
+        flex: 1;
+      }
+      .sig-label {
+        font-size: 9pt;
+        color: #555;
+        margin-top: 4pt;
+      }
+      /* The placeholders. Give each a definite size — it reserves the space the form widget
+         will occupy. Their visible content is irrelevant; they are left blank in the PDF. */
+      .pdfdigitalsignaturefield {
+        width: 100%;
+        height: 56pt;
+        border-bottom: 1px solid #888;
+      }
+      .pdfdatefield {
+        width: 100%;
+        height: 24pt;
+        border-bottom: 1px solid #888;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Service Agreement</h1>
+    <div class="meta">Agreement no. SA-2026-0531 &middot; Generated 31 May 2026</div>
+
+    <p>
+      This Service Agreement (the &ldquo;Agreement&rdquo;) is entered into between Acme
+      Corporation (&ldquo;Provider&rdquo;) and the undersigned client (&ldquo;Client&rdquo;).
+      By signing below, the Client agrees to the terms set out in this document.
+    </p>
+
+    <h2>1. Scope of Services</h2>
+    <p>
+      Provider shall deliver the services described in Schedule A with reasonable skill and
+      care, in accordance with the timelines mutually agreed by the parties in writing.
+    </p>
+
+    <h2>2. Fees and Payment</h2>
+    <p>
+      Client shall pay the fees set out in Schedule B within thirty (30) days of the date of
+      each invoice. Late payments may accrue interest at the rate permitted by law.
+    </p>
+
+    <h2>3. Term and Termination</h2>
+    <p>
+      This Agreement commences on the Effective Date and continues until the services are
+      complete, unless terminated earlier by either party on written notice as provided herein.
+    </p>
+
+    <h2>4. Confidentiality</h2>
+    <p>
+      Each party shall keep confidential all non-public information disclosed by the other
+      party and shall use it solely for the purposes of performing this Agreement.
+    </p>
+
+    <h2>5. Signatures</h2>
+    <p>The parties have executed this Agreement as of the date written above.</p>
+
+    <div class="sig-row">
+      <div class="sig-col">
+        <!-- Replaced by a blank AcroForm digital-signature field in the PDF. -->
+        <div class="pdfdigitalsignaturefield"></div>
+        <div class="sig-label">Client signature</div>
+      </div>
+      <div class="sig-col">
+        <!-- Replaced by a blank, fillable AcroForm date field in the PDF. -->
+        <div class="pdfdatefield"></div>
+        <div class="sig-label">Date (mm/dd/yyyy)</div>
+      </div>
+    </div>
+  </body>
+</html>

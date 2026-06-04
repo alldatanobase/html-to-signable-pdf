@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      /* A single-page invoice exercising table layout. It uses ONLY a date field (no signature
+         placeholder), demonstrating that the two placeholders are independent and optional. */
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 11pt;
+        color: #111;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 24pt;
+      }
+      h1 {
+        font-size: 22pt;
+        margin: 0;
+        letter-spacing: 1pt;
+      }
+      .from {
+        text-align: right;
+        font-size: 9pt;
+        color: #555;
+        line-height: 1.4;
+      }
+      .bill-to {
+        margin-bottom: 16pt;
+      }
+      .label {
+        font-size: 9pt;
+        color: #555;
+        text-transform: uppercase;
+        letter-spacing: 0.5pt;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 16pt;
+      }
+      th,
+      td {
+        padding: 6pt 8pt;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background: #f3f3f3;
+        font-size: 9pt;
+        text-transform: uppercase;
+        letter-spacing: 0.5pt;
+      }
+      td.num,
+      th.num {
+        text-align: right;
+      }
+      .totals {
+        width: 40%;
+        margin-left: auto;
+      }
+      .totals td {
+        border: none;
+        padding: 3pt 8pt;
+      }
+      .totals .grand {
+        font-weight: bold;
+        border-top: 2px solid #333;
+        font-size: 13pt;
+      }
+      .date-row {
+        margin-top: 36pt;
+        width: 40%;
+      }
+      .sig-label {
+        font-size: 9pt;
+        color: #555;
+        margin-top: 4pt;
+      }
+      .pdfdatefield {
+        width: 100%;
+        height: 24pt;
+        border-bottom: 1px solid #888;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>INVOICE</h1>
+        <div class="label">No. INV-2026-0412</div>
+      </div>
+      <div class="from">
+        Acme Corporation<br />
+        123 Industrial Way<br />
+        Springfield<br />
+        billing@acme.example
+      </div>
+    </header>
+
+    <div class="bill-to">
+      <div class="label">Bill to</div>
+      <div>Globex Industries</div>
+      <div>500 Commerce Blvd, Suite 200</div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th class="num">Qty</th>
+          <th class="num">Unit price</th>
+          <th class="num">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Consulting services — discovery phase</td>
+          <td class="num">20</td>
+          <td class="num">$150.00</td>
+          <td class="num">$3,000.00</td>
+        </tr>
+        <tr>
+          <td>Implementation — sprint 1</td>
+          <td class="num">40</td>
+          <td class="num">$150.00</td>
+          <td class="num">$6,000.00</td>
+        </tr>
+        <tr>
+          <td>Implementation — sprint 2</td>
+          <td class="num">40</td>
+          <td class="num">$150.00</td>
+          <td class="num">$6,000.00</td>
+        </tr>
+        <tr>
+          <td>Project management</td>
+          <td class="num">12</td>
+          <td class="num">$120.00</td>
+          <td class="num">$1,440.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="totals">
+      <tr>
+        <td>Subtotal</td>
+        <td class="num">$16,440.00</td>
+      </tr>
+      <tr>
+        <td>Tax (8%)</td>
+        <td class="num">$1,315.20</td>
+      </tr>
+      <tr class="grand">
+        <td>Total due</td>
+        <td class="num">$17,755.20</td>
+      </tr>
+    </table>
+
+    <div class="date-row">
+      <!-- Replaced by a blank, fillable AcroForm date field in the PDF. -->
+      <div class="pdfdatefield"></div>
+      <div class="sig-label">Date received (mm/dd/yyyy)</div>
+    </div>
+  </body>
+</html>

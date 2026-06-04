@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      /* Demonstrates a running header + footer repeated on every page, with page-number tokens.
+         The #pdfheader / #pdffooter elements are lifted out of the body before pagination and
+         re-injected into each page's top/bottom margin. Give the page generous top/bottom margins
+         (via the marginsPt option when calling the library) so the bands have room.
+
+         The footer is styled by a CLASS here (`.page-num`) to show that document <style> reaches
+         the injected copies — not just inline styles. */
+      body {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 11pt;
+        line-height: 1.5;
+        color: #111;
+      }
+      h1 {
+        font-size: 20pt;
+        margin: 0 0 8pt;
+      }
+      h2 {
+        font-size: 13pt;
+        margin: 16pt 0 6pt;
+      }
+      p {
+        margin: 0 0 8pt;
+        text-align: justify;
+      }
+
+      /* Header band: a title rule across the top margin. */
+      #pdfheader {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        height: 100%;
+        border-bottom: 1.5px solid #2563af;
+        padding-bottom: 4pt;
+        color: #2563af;
+        font-size: 9pt;
+      }
+      #pdfheader .title {
+        font-weight: bold;
+        font-size: 12pt;
+      }
+
+      /* Footer band: page numbering centered in the bottom margin. */
+      #pdffooter {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        height: 100%;
+        border-top: 0.75px solid #ccc;
+        padding-top: 4pt;
+      }
+      #pdffooter .page-num {
+        font-size: 9pt;
+        color: #555;
+      }
+
+      .sig-row {
+        display: flex;
+        gap: 24pt;
+        margin-top: 24pt;
+      }
+      .sig-col {
+        flex: 1;
+      }
+      .sig-label {
+        font-size: 9pt;
+        color: #555;
+        margin-top: 4pt;
+      }
+      .pdfdigitalsignaturefield {
+        width: 100%;
+        height: 56pt;
+        border-bottom: 1px solid #888;
+      }
+      .pdfdatefield {
+        width: 100%;
+        height: 24pt;
+        border-bottom: 1px solid #888;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Lifted out of the body and repeated in the TOP margin of every page. -->
+    <div id="pdfheader">
+      <span class="title">Field Operations Manual</span>
+      <span>Revision 3 &middot; Confidential</span>
+    </div>
+
+    <!-- Lifted out of the body and repeated in the BOTTOM margin of every page.
+         [[page]] = current page, [[pages]] = total page count. -->
+    <div id="pdffooter">
+      <span class="page-num">Page [[page]] of [[pages]]</span>
+    </div>
+
+    <h1>Field Operations Manual</h1>
+    <p>
+      This manual describes standard operating procedures for field technicians. The header above
+      and the page numbering below repeat on every page; they are written once in the source and
+      lifted into each page's margins automatically.
+    </p>
+
+    <h2>1. Preparation</h2>
+    <p>
+      Before departing for a site visit, confirm the work order, verify that all required tools and
+      personal protective equipment are accounted for, and review any site-specific access notes.
+      Notify the dispatcher of your estimated time of arrival and confirm the contact on site.
+    </p>
+    <p>
+      Inspect the vehicle and load list against the job requirements. Any missing or damaged
+      equipment must be reported and replaced before departure. Record starting mileage and fuel
+      level in the daily log.
+    </p>
+
+    <h2>2. On-Site Procedures</h2>
+    <p>
+      On arrival, check in with the site contact and review the scope of work. Identify hazards and
+      establish a safe working area before beginning. Follow all lockout/tagout requirements where
+      applicable, and do not proceed if conditions are unsafe.
+    </p>
+    <p>
+      Document the pre-existing condition of the work area with photographs. Perform the work in
+      accordance with the applicable specification, taking measurements and notes as you go. If the
+      scope changes, obtain written authorization before continuing.
+    </p>
+    <p>
+      Upon completion, clean the work area, remove all debris, and confirm the result with the site
+      contact. Capture closing photographs and obtain a signature acknowledging completion.
+    </p>
+
+    <h2>3. Safety Requirements</h2>
+    <p>
+      All technicians must complete safety certification before performing field work. Personal
+      protective equipment is mandatory in all designated areas. Report any incident, near miss, or
+      unsafe condition immediately, regardless of severity.
+    </p>
+    <p>
+      Maintain situational awareness at all times. Do not bypass safety devices or guards. When in
+      doubt, stop work and consult a supervisor. Safety takes precedence over schedule in every
+      circumstance, without exception.
+    </p>
+    <p>
+      Hazardous materials must be handled, stored, and disposed of in accordance with the relevant
+      regulations and the site's material handling plan. Keep safety data sheets accessible for all
+      materials carried.
+    </p>
+
+    <h2>4. Documentation</h2>
+    <p>
+      Accurate records are essential. Complete the field report before leaving the site, including
+      time on site, work performed, materials used, and any follow-up required. Attach all
+      photographs and measurements to the report.
+    </p>
+    <p>
+      Submit the completed report through the standard channel by end of day. Reports that are
+      incomplete or submitted late may delay invoicing and follow-up scheduling. Retain a copy of
+      all field notes until the job is closed.
+    </p>
+
+    <h2>5. Acknowledgement</h2>
+    <p>
+      By signing below, the technician confirms that the work described in this report was performed
+      in accordance with this manual and that the documentation is complete and accurate.
+    </p>
+    <div class="sig-row">
+      <div class="sig-col">
+        <div class="pdfdigitalsignaturefield"></div>
+        <div class="sig-label">Technician signature</div>
+      </div>
+      <div class="sig-col">
+        <div class="pdfdatefield"></div>
+        <div class="sig-label">Date (mm/dd/yyyy)</div>
+      </div>
+    </div>
+  </body>
+</html>
