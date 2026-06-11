@@ -53,21 +53,32 @@ export async function paginate(html: string, config: PaginateConfig): Promise<Pa
       : "",
   ].join("\n");
 
+  // Paged.js's Polisher injects the processed stylesheet (including our debug-outline / break
+  // rules) as <style> elements in document.head and never removes them — Previewer.preview()
+  // has no teardown. Left in place, those global class rules (e.g. the debug outline) would
+  // restyle the *next* generation's page boxes and accumulate on every run. We hold the
+  // previewer so cleanup can call polisher.destroy(), which removes exactly the nodes this
+  // run inserted (tracked per-Previewer, so concurrent runs don't clobber each other).
+  const previewer = new Previewer();
   const cssUrl = URL.createObjectURL(new Blob([css], { type: "text/css" }));
   try {
-    const previewer = new Previewer();
     await previewer.preview(html, [cssUrl], container);
   } finally {
     URL.revokeObjectURL(cssUrl);
   }
 
+  const cleanup = () => {
+    container.remove();
+    previewer.polisher.destroy();
+  };
+
   const pageBoxes = Array.from(
     container.querySelectorAll<HTMLElement>(".pagedjs_pagebox"),
   );
   if (pageBoxes.length === 0) {
-    container.remove();
+    cleanup();
     throw new Error("Paged.js produced no pages; check the input HTML.");
   }
 
-  return { pageBoxes, destroy: () => container.remove() };
+  return { pageBoxes, destroy: cleanup };
 }
